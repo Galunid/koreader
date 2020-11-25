@@ -141,6 +141,7 @@ if Device:hasFrontlight() then
         --received gesture
 
         direction, delta_int = calculateGestureDelta(ges, direction, powerd.fl_min, powerd.fl_max)
+        if not delta_int then return end -- in FileManager delta_int == nil
 
         local new_intensity = powerd.fl_intensity + direction * delta_int
         if new_intensity == nil then return true end
@@ -188,6 +189,7 @@ if Device:hasFrontlight() then
         --received gesture
 
         direction, delta_int = calculateGestureDelta(ges, direction, powerd.fl_warmth_min, powerd.fl_warmth_max)
+        if not delta_int then return end -- in FileManager delta_int == nil
 
         local warmth = math.floor(powerd.fl_warmth + direction * delta_int * 100 / powerd.fl_warmth_max)
         self:onSetFlWarmth(warmth)
